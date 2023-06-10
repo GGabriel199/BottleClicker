@@ -6,39 +6,37 @@ using TMPro;
 public class ScoreAndClicks : MonoBehaviour
 {
     private int clicks;
-    private int maxValue = 999999999;
-    private int level;
+    private int maxValue = 1000000000;
     private string label;
 
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI clicksText;
     public TextMeshProUGUI labelTxt;
+    public Animator anim;
 
     public GameObject bottle;
 
     void Start()
     {
         clicks = PlayerPrefs.GetInt("prefMoney");
-        level = 1;
-    }
-
-    // Update is called once per frame
-    public void PlusClicks()
-    {
-        clicks++;
-        FindObjectOfType<SoundManager>().Play("BottleClick");
-        PlayerPrefs.SetInt("prefMoney", clicks);
-        if (clicks >= maxValue)
-        {
-            clicks = 0;
-            level++;
-        }
     }
 
     private void Update()
     {
         clicksText.text = clicks.ToString();
-        levelText.text = level.ToString();
         labelTxt.text = label;
+    }
+
+    public void PlusClicks()
+    {
+        clicks++;
+        FindObjectOfType<SoundManager>().Play("BottleClick");
+        anim.Play("Bottle");
+        PlayerPrefs.SetInt("prefMoney", clicks);
+        if (clicks >= maxValue)
+        {
+            clicks = 0;
+            FindObjectOfType<PlayerLevel>().LevelUp();
+        }
     }
 }

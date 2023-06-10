@@ -12,6 +12,9 @@ public class ItemInShop : MonoBehaviour
     [SerializeField] private TextMeshProUGUI buttonText;
     [SerializeField] private Image itemImage;
 
+    private float clickPerSeconds;
+    private int clicks;
+
     private void Awake()
     {        
         itemImage.sprite = shopInfo._itemSprite;
@@ -23,6 +26,8 @@ public class ItemInShop : MonoBehaviour
         if (PlayerPrefs.GetInt(shopInfo._itemID.ToString()) == 1)
         {
             buttonText.text = "Buy: " + shopInfo._cost;
+            clickPerSeconds = shopInfo._timePerSecond;
+            clicks += shopInfo._plusClicks;
         }
         else
         {
@@ -37,6 +42,7 @@ public class ItemInShop : MonoBehaviour
             FindObjectOfType<SoundManager>().Play("Click");
             PlayerPrefs.SetInt(_shopInfo._itemID.ToString(), 1);
             IsSkinPurchased();
+            FindObjectOfType<ScoreAndClicks>().PlusClicks();
         }
     }
 }

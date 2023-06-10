@@ -6,9 +6,7 @@ using TMPro;
 public class PlayerMoney : MonoBehaviour
 {
     public static PlayerMoney Instance;
-
     [SerializeField] private int scoreGame;
-
     public TextMeshProUGUI scoreTxt;
     private const string prefMoney = "prefMoney";
 

@@ -7,9 +7,12 @@ using UnityEngine.UI;
 public class PlayerLevel : MonoBehaviour
 {
     public int level;
+    public Button[] levelButton;
     public TextMeshProUGUI txtLevel;
     public Animator popUp;
-    public Sprite[] bottles;
+
+    public Sprite[] bottle;
+
     private void Start()
     {
         level = 1;
@@ -18,13 +21,32 @@ public class PlayerLevel : MonoBehaviour
 
     private void Update()
     {
-        txtLevel.text = level.ToString();
+        txtLevel.text = "Level: " + level.ToString();
     }
 
     public void LevelUp()
     {
+        if(level >= 2){
+            levelButton[0].interactable = true;
+        }
+        if(level >= 3){
+            levelButton[1].interactable = true;
+        }
+        if(level >= 4){
+            levelButton[2].interactable = true;
+        }
+        if(level >= 5){
+            levelButton[3].interactable = true;
+        }
+        if(level >= 6){
+            levelButton[4].interactable = true;
+        }
         popUp.Play("LevelUp");
         level++;
         PlayerPrefs.SetInt("PlayerLevel", level);
+    }
+
+    public void BottleSkins(){
+
     }
 }

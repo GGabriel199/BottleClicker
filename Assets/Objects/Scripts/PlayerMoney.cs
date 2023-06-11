@@ -7,7 +7,6 @@ public class PlayerMoney : MonoBehaviour
 {
     public static PlayerMoney Instance;
     [SerializeField] private int scoreGame;
-    public TextMeshProUGUI scoreTxt;
     private const string prefMoney = "prefMoney";
 
     private void Awake()
@@ -18,7 +17,6 @@ public class PlayerMoney : MonoBehaviour
 
     private void Update()
     {
-        scoreTxt.text = scoreGame.ToString();
     }
 
     public bool TryRemoveMoney(int moneyToRemove)

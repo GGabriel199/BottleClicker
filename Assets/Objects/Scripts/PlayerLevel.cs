@@ -15,8 +15,7 @@ public class PlayerLevel : MonoBehaviour
 
     private void Start()
     {
-        level = 1;
-        level = PlayerPrefs.GetInt("PlayerLevel");
+        level = PlayerPrefs.GetInt("PlayerLevel", 1);
     }
 
     private void Update()
@@ -28,6 +27,7 @@ public class PlayerLevel : MonoBehaviour
     {
         if(level >= 2){
             levelButton[0].interactable = true;
+
         }
         if(level >= 3){
             levelButton[1].interactable = true;

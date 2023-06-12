@@ -81,7 +81,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 5734924945943661765}
-    m_Position: {x: 270, y: 170, z: 0}
+    m_Position: {x: 270, y: 180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5538970162868500550}
     m_Position: {x: 270, y: 100, z: 0}
@@ -102,7 +102,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bottle
+  m_Name: Standard
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:

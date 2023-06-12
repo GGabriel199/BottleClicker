@@ -13,6 +13,7 @@ public class ScoreAndClicks : MonoBehaviour
     public TextMeshProUGUI[] costText;
     public TextMeshProUGUI maxValueTxt;
     public Animator anim;
+    public string name;
 
     public GameObject bottle;
 
@@ -34,7 +35,7 @@ public class ScoreAndClicks : MonoBehaviour
     {
         GameManaging.o2 += GameManaging.multiplier;
         FindObjectOfType<SoundManager>().Play("BottleClick");
-        anim.Play("Bottle");
+        anim.Play(name);
         PlayerPrefs.SetInt("o2", GameManaging.o2);
         if (GameManaging.o2 >= maxValue)
         {

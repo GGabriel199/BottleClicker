@@ -42,6 +42,9 @@ public class PlayerLevel : MonoBehaviour
             levelButton[4].interactable = true;
         }
         popUp.Play("LevelUp");
+        GameManaging.multiplier = 1;
+        GameManaging.o2 = 0;
+        FindObjectOfType<SoundManager>().Play("LevelUp");
         level++;
         PlayerPrefs.SetInt("PlayerLevel", level);
     }

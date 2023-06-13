@@ -15,10 +15,12 @@ public class ChangeSkin : MonoBehaviour
     public void StandardSkin(){
         GetComponent<Animator>().runtimeAnimatorController = bottle as RuntimeAnimatorController;
         spriteRenderer.sprite = bottles[0];
+        PlayerPrefs.Save();
     }
 
     public void JuiceSkin(){
         GetComponent<Animator>().runtimeAnimatorController = juice as RuntimeAnimatorController;
         spriteRenderer.sprite = bottles[1];
+        PlayerPrefs.Save();
     }
 }

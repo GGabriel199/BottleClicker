@@ -8,8 +8,11 @@ public class DeleteData : MonoBehaviour
     public void Delete(){
         PlayerPrefs.DeleteKey("prefMoney");
         PlayerPrefs.DeleteKey("o2");
-        PlayerPrefs.DeleteKey("cost");
+        PlayerPrefs.DeleteKey("costSoda");
+        PlayerPrefs.DeleteKey("costWine");
+        PlayerPrefs.DeleteKey("costChoppMachine");
         PlayerPrefs.DeleteKey("PlayerLevel");
+        PlayerPrefs.DeleteKey("maxValue");
         SceneManager.LoadScene(0);
     }
 }

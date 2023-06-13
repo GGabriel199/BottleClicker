@@ -5,7 +5,7 @@ using TMPro;
 
 public class ScoreAndClicks : MonoBehaviour
 {
-    private int maxValue = 1000000;
+    private int maxValue;
     public int[] cost;
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI clicksText;
@@ -13,7 +13,6 @@ public class ScoreAndClicks : MonoBehaviour
     public TextMeshProUGUI[] costText;
     public TextMeshProUGUI maxValueTxt;
     public Animator anim;
-    public string name;
 
     public GameObject bottle;
 
@@ -21,6 +20,10 @@ public class ScoreAndClicks : MonoBehaviour
     {
         GameManaging.multiplier = PlayerPrefs.GetInt("prefMoney", 1);
         GameManaging.o2 = PlayerPrefs.GetInt("o2", 0);
+        maxValue = PlayerPrefs.GetInt("maxValue", 1000000);
+        cost[0] = PlayerPrefs.GetInt("costSoda", 50);
+        cost[1] = PlayerPrefs.GetInt("costWine", 150);
+        cost[2] = PlayerPrefs.GetInt("costChoppMachine", 1200);
     }
 
     private void Update()
@@ -35,12 +38,13 @@ public class ScoreAndClicks : MonoBehaviour
     {
         GameManaging.o2 += GameManaging.multiplier;
         FindObjectOfType<SoundManager>().Play("BottleClick");
-        anim.Play(name);
+        anim.Play("Press");
         PlayerPrefs.SetInt("o2", GameManaging.o2);
         if (GameManaging.o2 >= maxValue)
         {
             maxValue += maxValue * 1/5;
             FindObjectOfType<PlayerLevel>().LevelUp();
+            PlayerPrefs.SetInt("maxValue", maxValue);
         }
     }
 
@@ -51,7 +55,7 @@ public class ScoreAndClicks : MonoBehaviour
             GameManaging.multiplier += 1;
             GameManaging.o2 -=50;
             FindObjectOfType<SoundManager>().Play("Click");
-            PlayerPrefs.SetInt("cost",cost[0]);
+            PlayerPrefs.SetInt("costSoda",cost[0]);
             PlayerPrefs.SetInt("o2", GameManaging.o2);
             PlayerPrefs.SetInt("prefMoney", GameManaging.multiplier);
         }
@@ -60,7 +64,7 @@ public class ScoreAndClicks : MonoBehaviour
             GameManaging.multiplier += 5;
             GameManaging.o2 -=150;
             FindObjectOfType<SoundManager>().Play("Click");
-            PlayerPrefs.SetInt("cost",cost[1]);
+            PlayerPrefs.SetInt("costWine",cost[1]);
             PlayerPrefs.SetInt("o2", GameManaging.o2);
             PlayerPrefs.SetInt("prefMoney", GameManaging.multiplier);
         }
@@ -69,7 +73,7 @@ public class ScoreAndClicks : MonoBehaviour
             GameManaging.multiplier += 20;
             GameManaging.o2 -= 1200;
             FindObjectOfType<SoundManager>().Play("Click");
-            PlayerPrefs.SetInt("cost",cost[2]);
+            PlayerPrefs.SetInt("costChoppMachine",cost[2]);
             PlayerPrefs.SetInt("o2", GameManaging.o2);
             PlayerPrefs.SetInt("prefMoney", GameManaging.multiplier);
         }

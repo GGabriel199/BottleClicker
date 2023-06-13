@@ -8,6 +8,7 @@ public class PlayerLevel : MonoBehaviour
 {
     public int level;
     public Button[] levelButton;
+    public Button[] backGroundBtn;
     public TextMeshProUGUI txtLevel;
     public Animator popUp;
 
@@ -25,20 +26,22 @@ public class PlayerLevel : MonoBehaviour
 
     public void LevelUp()
     {
-        if(level >= 2){
+        if(level >= 0){
             levelButton[0].interactable = true;
-
+            FindObjectOfType<ChangeSkin>().JuiceSkin();
+        }
+        if(level >= 1){
+            levelButton[1].interactable = true;
+            backGroundBtn[0].interactable = true;
+        }
+        if(level >= 2){
+            levelButton[2].interactable = true;
+            backGroundBtn[1].interactable = true;
         }
         if(level >= 3){
-            levelButton[1].interactable = true;
-        }
-        if(level >= 4){
-            levelButton[2].interactable = true;
-        }
-        if(level >= 5){
             levelButton[3].interactable = true;
         }
-        if(level >= 6){
+        if(level >= 4){
             levelButton[4].interactable = true;
         }
         popUp.Play("LevelUp");

@@ -8,6 +8,7 @@ public class ChangeSkin : MonoBehaviour
     public Sprite[] bottles;
     public AnimatorOverrideController bottle;
     public AnimatorOverrideController juice;
+    public AnimatorOverrideController coffee;
 
     void Start(){
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -21,6 +22,12 @@ public class ChangeSkin : MonoBehaviour
     public void JuiceSkin(){
         GetComponent<Animator>().runtimeAnimatorController = juice as RuntimeAnimatorController;
         spriteRenderer.sprite = bottles[1];
+        PlayerPrefs.Save();
+    }
+
+    public void Coffee(){
+        GetComponent<Animator>().runtimeAnimatorController = coffee as RuntimeAnimatorController;
+        spriteRenderer.sprite = bottles[2];
         PlayerPrefs.Save();
     }
 }

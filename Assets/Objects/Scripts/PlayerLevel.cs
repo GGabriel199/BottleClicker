@@ -26,33 +26,30 @@ public class PlayerLevel : MonoBehaviour
 
     public void LevelUp()
     {
-        if(level >= 0){
+        if(level >= 1){
             levelButton[0].interactable = true;
             FindObjectOfType<ChangeSkin>().JuiceSkin();
         }
-        if(level >= 1){
+        if(level >= 2){
             levelButton[1].interactable = true;
             backGroundBtn[0].interactable = true;
+            FindObjectOfType<ChangeSkin>().Coffee();
         }
-        if(level >= 2){
+        if(level >= 3){
             levelButton[2].interactable = true;
             backGroundBtn[1].interactable = true;
         }
-        if(level >= 3){
+        if(level >= 4){
             levelButton[3].interactable = true;
         }
-        if(level >= 4){
+        if(level >= 5){
             levelButton[4].interactable = true;
         }
         popUp.Play("LevelUp");
         GameManaging.multiplier = 1;
         GameManaging.o2 = 0;
         FindObjectOfType<SoundManager>().Play("LevelUp");
-        level++;
         PlayerPrefs.SetInt("PlayerLevel", level);
-    }
-
-    public void BottleSkins(){
-
+        level++;
     }
 }

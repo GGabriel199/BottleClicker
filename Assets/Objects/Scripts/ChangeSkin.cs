@@ -16,18 +16,18 @@ public class ChangeSkin : MonoBehaviour
     public void StandardSkin(){
         GetComponent<Animator>().runtimeAnimatorController = bottle as RuntimeAnimatorController;
         spriteRenderer.sprite = bottles[0];
-        PlayerPrefs.Save();
+        FindObjectOfType<SoundManager>().Play("Selected");
     }
 
     public void JuiceSkin(){
         GetComponent<Animator>().runtimeAnimatorController = juice as RuntimeAnimatorController;
         spriteRenderer.sprite = bottles[1];
-        PlayerPrefs.Save();
+        FindObjectOfType<SoundManager>().Play("Selected");
     }
 
     public void Coffee(){
         GetComponent<Animator>().runtimeAnimatorController = coffee as RuntimeAnimatorController;
         spriteRenderer.sprite = bottles[2];
-        PlayerPrefs.Save();
+        FindObjectOfType<SoundManager>().Play("Selected");
     }
 }

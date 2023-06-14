@@ -8,6 +8,7 @@ public class MenuButton : MonoBehaviour
 
     public void OpenMenu()
     {
+        FindObjectOfType<SoundManager>().Play("Click3");
         panel.SetActive(true);
     }
 }

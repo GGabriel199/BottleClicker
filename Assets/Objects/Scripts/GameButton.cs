@@ -9,6 +9,7 @@ public class GameButton : MonoBehaviour
     public void ClosePanel()
     {
         panel.SetActive(false);
+        FindObjectOfType<SoundManager>().Play("Click2");
     }
 
 }

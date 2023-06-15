@@ -17,6 +17,7 @@ public class PlayerLevel : MonoBehaviour
 
     private void Start()
     {
+        FindObjectOfType<SoundManager>().Play("Main Theme");
         level = PlayerPrefs.GetInt("PlayerLevel", 1);
     }
 

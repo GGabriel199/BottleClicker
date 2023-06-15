@@ -29,7 +29,7 @@ public class ScoreAndClicks : MonoBehaviour
     private void Update()
     {
         clicksText.text = "Clicks: " + GameManaging.o2;
-        clicksTextShop.text = "$ " + GameManaging.o2;
+        clicksTextShop.text = "$" + GameManaging.o2;
         maxValueTxt.text = "Max Value: " + maxValue.ToString();
         Cost();
     }

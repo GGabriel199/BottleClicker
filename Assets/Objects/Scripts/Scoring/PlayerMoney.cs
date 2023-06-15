@@ -15,10 +15,6 @@ public class PlayerMoney : MonoBehaviour
         scoreGame = PlayerPrefs.GetInt(prefMoney);
     }
 
-    private void Update()
-    {
-    }
-
     public bool TryRemoveMoney(int moneyToRemove)
     {
         if (scoreGame >= moneyToRemove)

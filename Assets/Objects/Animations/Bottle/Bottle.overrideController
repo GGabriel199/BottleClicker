@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Bottle
+  m_Controller: {fileID: 9100000, guid: edf76268abcbd9e48840fd91522d4d54, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 398b064909d3b784ea3107456b506fe2, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 398b064909d3b784ea3107456b506fe2, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 4a46a77ec71e0ee4bb95412e78c3c297, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 4a46a77ec71e0ee4bb95412e78c3c297, type: 2}

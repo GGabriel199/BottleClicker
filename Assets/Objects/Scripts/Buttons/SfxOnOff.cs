@@ -6,27 +6,19 @@ public class SfxOnOff : MonoBehaviour
 {
     public GameObject sfxOn;
     public GameObject sfxOff;
-    public void SfxOn()
-    {
-        FindObjectOfType<SoundManager>().Play("Click2");
-        FindObjectOfType<SoundManager>().Play("BottleClick");
-        FindObjectOfType<SoundManager>().Play("ClickOff");
-        FindObjectOfType<SoundManager>().Play("LevelUp");
-        FindObjectOfType<SoundManager>().Play("Click3");
-        FindObjectOfType<SoundManager>().Play("Selected");
-        sfxOn.SetActive(false);
-        sfxOff.SetActive(true);
-    }
 
-    public void SfxOff()
+    public void Sfx(bool muted)
     {
-        FindObjectOfType<SoundManager>().StopPlaying("Click2");
-        FindObjectOfType<SoundManager>().StopPlaying("BottleClick");
-        FindObjectOfType<SoundManager>().StopPlaying("ClickOff");
-        FindObjectOfType<SoundManager>().StopPlaying("LevelUp");
-        FindObjectOfType<SoundManager>().StopPlaying("Click3");
-        FindObjectOfType<SoundManager>().StopPlaying("Selected");
-        sfxOff.SetActive(false);
-        sfxOn.SetActive(true);
+        if(muted == false){
+            AudioListener.volume = 1;
+            sfxOff.SetActive(true);
+            sfxOn.SetActive(false);
+        }
+        else{
+            AudioListener.volume = 0;
+            sfxOff.SetActive(false);
+            sfxOn.SetActive(true);
+        }
+        
     }
 }

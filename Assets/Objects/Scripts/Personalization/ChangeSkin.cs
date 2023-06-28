@@ -1,61 +1,70 @@
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-using UnityEngine.UI;
+using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class ChangeSkin : MonoBehaviour
 {
+    public GameObject sr = GameManaging.sr;
+    public int selectedSprite;
+    public List<GameObject> playerPrefabs = new List<GameObject>();
 
-    public static ChangeSkin Instance;
-    public SpritesInfo[] allSkins;
-    public SpriteRenderer playerSR;
-    public static Sprite selectedBottle { get; private set; }
-    private const string skinPref = "skinPref";
-    private Button currentlyEquippedSkinButton;
 
-    public AnimatorOverrideController waterBottle;
-    public AnimatorOverrideController juice;
-    public AnimatorOverrideController coffee;
-    public AnimatorOverrideController soda;
-    public AnimatorOverrideController flask;
-    public AnimatorOverrideController christmassbt;
-
-    [SerializeField] private Transform skinsInShopPanelsParent;
-    [SerializeField] private List<SpriteInShop> skinsInShopPanels = new List<SpriteInShop>();
-
-    void Awake(){
-        Instance = this;
-
-        foreach(Transform s in skinsInShopPanelsParent)
-        {
-            if (s.TryGetComponent(out SpriteInShop skinInShop))
-            {
-                skinsInShopPanels.Add(skinInShop);
-            }
-        }
-
-        EquipPreviousSkin();
-
-        SpriteInShop skinEquippedPanel = Array.Find(skinsInShopPanels.ToArray(), dummyFind => dummyFind.spriteInfo.skinSprite == selectedBottle);
-        currentlyEquippedSkinButton = skinEquippedPanel.GetComponentInChildren<Button>();
-        currentlyEquippedSkinButton.interactable= false;
+    public void PlayGame(){
+        SceneManager.LoadScene(0);
     }
 
-        private void EquipPreviousSkin()
-    {
-        string lastSkinUsed = PlayerPrefs.GetString("skinPref", SpritesInfo.SpriteIDs.waterBottle.ToString());
-        SpriteInShop skinEquippedPanel = Array.Find(skinsInShopPanels.ToArray(), dummyFind => dummyFind.spriteInfo.spriteId.ToString() == lastSkinUsed);
-        SelectSkin(skinEquippedPanel);
+    public void WaterBottle(){
+        selectedSprite = 0;
+        PlayerPrefs.SetInt("SelectedSprite", selectedSprite);
+        FindObjectOfType<SoundManager>().Play("TapGlass");
+        sr = playerPrefabs[selectedSprite];
+        sr.SetActive(false);
+        PlayGame();
     }
 
-    public void SelectSkin(SpriteInShop spriteInfo){
-        selectedBottle = spriteInfo.spriteInfo.skinSprite;
-        PlayerPrefs.SetString("skinPref", spriteInfo.spriteInfo.spriteId.ToString());
-        
-        if(currentlyEquippedSkinButton != null)
-            currentlyEquippedSkinButton.interactable = true;
+    public void JuiceJar(){
+        selectedSprite = 1;
+        PlayerPrefs.SetInt("SelectedSprite", selectedSprite);
+        FindObjectOfType<SoundManager>().Play("TapGlass");
+        sr = playerPrefabs[selectedSprite];
+        sr.SetActive(false);
+        PlayGame();
+    }
 
-        currentlyEquippedSkinButton = spriteInfo.GetComponentInChildren<Button>();
-        currentlyEquippedSkinButton.interactable = false;
+    public void Coffee(){
+        selectedSprite = 2;
+        PlayerPrefs.SetInt("SelectedSprite", selectedSprite);
+        FindObjectOfType<SoundManager>().Play("ThermicBottle");
+        sr = playerPrefabs[selectedSprite];
+        sr.SetActive(false);
+        PlayGame();
+    }
+
+    public void SodaBottle(){
+        selectedSprite = 3;
+        PlayerPrefs.SetInt("SelectedSprite", selectedSprite);
+        FindObjectOfType<SoundManager>().Play("OpenCan1");
+        sr = playerPrefabs[selectedSprite];
+        sr.SetActive(false);
+        PlayGame();
+    }
+
+    public void Flask(){
+        selectedSprite = 4;
+        PlayerPrefs.SetInt("SelectedSprite", selectedSprite);
+        FindObjectOfType<SoundManager>().Play("ThermicBottle");
+        sr = playerPrefabs[selectedSprite];
+        sr.SetActive(false);
+        PlayGame();
+    }
+
+    public void Christmass(){
+        selectedSprite = 5;
+        PlayerPrefs.SetInt("SelectedSprite", selectedSprite);
+        FindObjectOfType<SoundManager>().Play("OpenCan1");
+        sr = playerPrefabs[selectedSprite];
+        sr.SetActive(false);
+        PlayGame();
     }
 }

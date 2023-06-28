@@ -38,6 +38,7 @@ public class PlayerLevel : MonoBehaviour
         GameManaging.multiplier = 1;
         GameManaging.o2 = 0;
         FindObjectOfType<SoundManager>().Play("LevelUp");
+        FindObjectOfType<Particles>().SoundAndEffects();
         level++;
         PlayerPrefs.SetInt("PlayerLevel", level);
         if(newThings != false){

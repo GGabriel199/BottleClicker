@@ -8,26 +8,28 @@ public class ScoreAndClicks : MonoBehaviour
 {
     private int maxValue;
     public int[] cost;
-    private int pressed;
+    private int pressed = 1;
     public Button button;
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI clicksText;
     public TextMeshProUGUI clicksTextShop;
     public TextMeshProUGUI[] costText;
     public TextMeshProUGUI maxValueTxt;
-    public Animator anim;
+    private Animator anim;
+    private int selectedSprite;
 
-    public GameObject bottle;
-
+    void Awake(){
+        LoadData();
+    }
     void Start()
     {
-        GameManaging.multiplier = PlayerPrefs.GetInt("prefMoney", 1);
-        GameManaging.o2 = PlayerPrefs.GetInt("o2", 0);
-        maxValue = PlayerPrefs.GetInt("maxValue", 1000000);
-        cost[0] = PlayerPrefs.GetInt("costSoda", 50);
-        cost[1] = PlayerPrefs.GetInt("costWine", 150);
-        cost[2] = PlayerPrefs.GetInt("costChoppMachine", 1200);
-        cost[3] = PlayerPrefs.GetInt("costMultiplier", maxValue /2);
+        if(PlayerPrefs.HasKey("SelectedSprite")){
+            selectedSprite = PlayerPrefs.GetInt("SelectedSprite");
+            anim = GetComponent<Animator>();
+        }
+        
+        
+        FindObjectOfType<Particles>().SoundAndEffects();
     }
 
     private void Update()
@@ -38,27 +40,40 @@ public class ScoreAndClicks : MonoBehaviour
         Cost();
     }
 
+    private void LoadData(){
+        GameManaging.multiplier = PlayerPrefs.GetInt("prefMoney", 1);
+        GameManaging.o2 = PlayerPrefs.GetInt("o2", 0);
+        maxValue = PlayerPrefs.GetInt("maxValue", 1000000);
+        cost[0] = PlayerPrefs.GetInt("costSoda", 50);
+        cost[1] = PlayerPrefs.GetInt("costWine", 150);
+        cost[2] = PlayerPrefs.GetInt("costChoppMachine", 1200);
+        cost[3] = PlayerPrefs.GetInt("costMultiplier", maxValue /2);
+    }
+
     public void PlusClicks()
     {
         GameManaging.o2 += GameManaging.multiplier;
-        FindObjectOfType<SoundManager>().Play("BottleClick2");
-        pressed++;
-        if(pressed >= 4){
-            FindObjectOfType<SoundManager>().StopPlaying("BottleClick2");
-            FindObjectOfType<SoundManager>().Play("BottleClick");
-            if(pressed >= 7){
-                FindObjectOfType<SoundManager>().StopPlaying("BottleClick");
-                FindObjectOfType<SoundManager>().Play("BottleClick3");
-                pressed = 0;
-            }
-        }
+        ClickSound();
         anim.Play("Press");
+        pressed = Random.Range(1,4);
         PlayerPrefs.SetInt("o2", GameManaging.o2);
         if (GameManaging.o2 >= maxValue)
         {
             maxValue += maxValue * 1/5;
             FindObjectOfType<PlayerLevel>().LevelUp();
             PlayerPrefs.SetInt("maxValue", maxValue);
+        }
+    }
+
+    public void ClickSound(){
+        if(pressed == 1){
+            FindObjectOfType<SoundManager>().Play("BottleClick");
+        }
+        if(pressed == 2){
+            FindObjectOfType<SoundManager>().Play("BottleClick2");
+        }
+        if(pressed == 3){
+            FindObjectOfType<SoundManager>().Play("BottleClick3");
         }
     }
 

@@ -13,43 +13,72 @@ public class Hiring : MonoBehaviour
     private bool bugBought;
     private bool gunBought;
     private bool springBought;
-    public Animator[] anim;
-    public Button[] button;
+    public List<Animator>anim = new List<Animator>();
+    public Animator activeItem;
+    public GameObject[] hired;
     public int[] price;
+    private int selectedObject;
     public TextMeshProUGUI[] priceText;
 
+    void Start(){
+        if(PlayerPrefs.HasKey("SelectedHired"))
+        {
+            selectedObject = PlayerPrefs.GetInt("SelectedHired");
+            activeItem = anim[selectedObject];
+        }
+    }
     void Update()
     {
         Isbought();
     }
 
+    public void SaveObject(){
+        PlayerPrefs.SetInt("SelectedHired", selectedObject);
+        activeItem = anim[selectedObject];
+    }
+    
     //Hire Store information
     public void HiringShop(int value)
     {
         if(value == 1 && GameManaging.o2 >= price[0]){
             GameManaging.o2 -= price[0];
             bugBought = true;
-            button[0].interactable = false;
-            priceText[0].text = "Out Of Stock";
+            priceText[0].text = "Dismiss!";
+            selectedObject = 0;
+            SaveObject();
+            hired[0].SetActive(true);
+            Unhire(1, false);
+            Unhire(2, true);
+            Unhire(3, true);
         }
         if(value == 2 && GameManaging.o2 >= price[1]){
             GameManaging.o2 -= price[1];
             gunBought = true;
-            button[1].interactable = false;
-            priceText[1].text = "Out Of Stock";
+            priceText[1].text = "Dismiss!";
+            selectedObject = 1;
+            SaveObject();
+            hired[1].SetActive(true);
+            Unhire(1, true);
+            Unhire(2, false);
+            Unhire(3, true);
         }
         if(value == 3 && GameManaging.o2 >= price[2]){
             GameManaging.o2 -= price[2];
             springBought = true;
-            button[2].interactable = false;
-            priceText[2].text = "Out Of Stock";
+            priceText[2].text = "Dismiss!";
+            selectedObject = 2;
+            SaveObject();
+            hired[2].SetActive(true);
+            Unhire(1, true);
+            Unhire(2, true);
+            Unhire(3, false);
         }
     }
 
     void Isbought(){
         if(bugBought != true)
         {
-            priceText[0].text = "Buy$:" + price[0].ToString();
+            priceText[0].text = "Buy$" + price[0].ToString();
         }
         else
         {
@@ -61,7 +90,7 @@ public class Hiring : MonoBehaviour
         }
         if(gunBought != true)
         {
-            priceText[1].text = "Buy$:" + price[1].ToString();
+            priceText[1].text = "Buy$" + price[1].ToString();
         }
         else
         {
@@ -73,7 +102,7 @@ public class Hiring : MonoBehaviour
         }
         if(springBought != true)
         {
-            priceText[2].text = "Buy$:" + price[2].ToString();
+            priceText[2].text = "Buy$" + price[2].ToString();
         }
         else
         {
@@ -123,5 +152,31 @@ public class Hiring : MonoBehaviour
 
             yield break;
         }
+    }
+
+    public void Unhire(int value, bool pressed)
+    {
+        if(value == 1 && pressed == true){
+            hired[0].SetActive(false);
+            priceText[0].text = "Hire again$" + price[0].ToString();
+        }
+        else if(pressed == false){
+            HiringShop(1);
+        }
+        if(value == 2 && pressed == true){
+            hired[1].SetActive(false);
+            priceText[1].text = "Hire again$" + price[1].ToString();
+        }
+        else if(pressed == false){
+            HiringShop(2);
+        }
+        if(value == 3 && pressed == true){
+            hired[2].SetActive(false);
+            priceText[2].text = "Hire again$" + price[2].ToString();
+        }
+        else if(pressed == false){
+            HiringShop(3);
+        }
+       
     }
 }

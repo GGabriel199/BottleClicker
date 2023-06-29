@@ -20,7 +20,7 @@ public class ChangeSkin : MonoBehaviour
         FindObjectOfType<SoundManager>().Play("TapGlass");
         sr = playerPrefabs[selectedSprite];
         sr.SetActive(false);
-        Invoke("PlayGame", 3);
+        Invoke("PlayGame", 1);
     }
 
     public void JuiceJar(){
@@ -29,7 +29,7 @@ public class ChangeSkin : MonoBehaviour
         FindObjectOfType<SoundManager>().Play("TapGlass");
         sr = playerPrefabs[selectedSprite];
         sr.SetActive(false);
-        Invoke("PlayGame", 3);
+        Invoke("PlayGame", 1);
     }
 
     public void Coffee(){
@@ -38,7 +38,7 @@ public class ChangeSkin : MonoBehaviour
         FindObjectOfType<SoundManager>().Play("ThermicBottle");
         sr = playerPrefabs[selectedSprite];
         sr.SetActive(false);
-        Invoke("PlayGame", 3);
+        Invoke("PlayGame", 1);
     }
 
     public void SodaBottle(){
@@ -47,7 +47,7 @@ public class ChangeSkin : MonoBehaviour
         FindObjectOfType<SoundManager>().Play("OpenCan1");
         sr = playerPrefabs[selectedSprite];
         sr.SetActive(false);
-        Invoke("PlayGame", 3);
+        Invoke("PlayGame", 1);
     }
 
     public void Flask(){
@@ -56,7 +56,7 @@ public class ChangeSkin : MonoBehaviour
         FindObjectOfType<SoundManager>().Play("ThermicBottle");
         sr = playerPrefabs[selectedSprite];
         sr.SetActive(false);
-        Invoke("PlayGame", 3);
+        Invoke("PlayGame", 1);
     }
 
     public void Christmass(){
@@ -65,6 +65,6 @@ public class ChangeSkin : MonoBehaviour
         FindObjectOfType<SoundManager>().Play("OpenCan1");
         sr = playerPrefabs[selectedSprite];
         sr.SetActive(false);
-        Invoke("PlayGame", 3);
+        Invoke("PlayGame", 1);
     }
 }

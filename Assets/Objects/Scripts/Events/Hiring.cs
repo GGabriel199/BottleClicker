@@ -14,18 +14,15 @@ public class Hiring : MonoBehaviour
     private bool gunBought;
     private bool springBought;
     public List<Animator>anim = new List<Animator>();
-    public Animator activeItem;
-    public GameObject[] hired;
+    public Animator[] activeItem;
+    public GameObject[] hiredOn;
+    public GameObject[] hiredOff;
     public int[] price;
     private int selectedObject;
     public TextMeshProUGUI[] priceText;
 
     void Start(){
-        if(PlayerPrefs.HasKey("SelectedHired"))
-        {
-            selectedObject = PlayerPrefs.GetInt("SelectedHired");
-            activeItem = anim[selectedObject];
-        }
+        LoadKeys();
     }
     void Update()
     {
@@ -34,44 +31,37 @@ public class Hiring : MonoBehaviour
 
     public void SaveObject(){
         PlayerPrefs.SetInt("SelectedHired", selectedObject);
-        activeItem = anim[selectedObject];
+        for (int i = 0; i < activeItem.Length; i++){
+            activeItem[i] = anim[selectedObject];
+        }
     }
     
     //Hire Store information
     public void HiringShop(int value)
     {
-        if(value == 1 && GameManaging.o2 >= price[0]){
+        if(value == 1 && GameManaging.o2 >= price[0] && bugBought == false){
             GameManaging.o2 -= price[0];
             bugBought = true;
-            priceText[0].text = "Dismiss!";
             selectedObject = 0;
             SaveObject();
-            hired[0].SetActive(true);
-            Unhire(1, false);
-            Unhire(2, true);
-            Unhire(3, true);
+            hiredOn[0].SetActive(false);
+            hiredOff[0].SetActive(true);
         }
-        if(value == 2 && GameManaging.o2 >= price[1]){
+        if(value == 2 && GameManaging.o2 >= price[1] && gunBought == false){
             GameManaging.o2 -= price[1];
             gunBought = true;
-            priceText[1].text = "Dismiss!";
             selectedObject = 1;
             SaveObject();
-            hired[1].SetActive(true);
-            Unhire(1, true);
-            Unhire(2, false);
-            Unhire(3, true);
+            hiredOn[1].SetActive(false);
+            hiredOff[1].SetActive(true);
         }
-        if(value == 3 && GameManaging.o2 >= price[2]){
+        if(value == 3 && GameManaging.o2 >= price[2] && springBought == false){
             GameManaging.o2 -= price[2];
             springBought = true;
-            priceText[2].text = "Dismiss!";
             selectedObject = 2;
             SaveObject();
-            hired[2].SetActive(true);
-            Unhire(1, true);
-            Unhire(2, true);
-            Unhire(3, false);
+            hiredOn[2].SetActive(false);
+            hiredOff[2].SetActive(true);
         }
     }
 
@@ -79,6 +69,8 @@ public class Hiring : MonoBehaviour
         if(bugBought != true)
         {
             priceText[0].text = "Buy$" + price[0].ToString();
+            hiredOn[0].SetActive(true);
+            hiredOff[0].SetActive(false);
         }
         else
         {
@@ -91,6 +83,8 @@ public class Hiring : MonoBehaviour
         if(gunBought != true)
         {
             priceText[1].text = "Buy$" + price[1].ToString();
+            hiredOn[1].SetActive(true);
+            hiredOff[1].SetActive(false);
         }
         else
         {
@@ -103,6 +97,8 @@ public class Hiring : MonoBehaviour
         if(springBought != true)
         {
             priceText[2].text = "Buy$" + price[2].ToString();
+            hiredOn[2].SetActive(true);
+            hiredOff[2].SetActive(false);
         }
         else
         {
@@ -113,7 +109,29 @@ public class Hiring : MonoBehaviour
             }
         }
     }
+    public void Unhire(int value)
+    {
+        if(value == 1 && bugBought == true){
+            hiredOn[0].SetActive(true);
+            hiredOff[0].SetActive(false);
+            StopCoroutine(Scoring(1));
+            bugBought = false;
+        }
 
+        if(value == 2 && gunBought == true){
+            hiredOn[1].SetActive(true);
+            hiredOff[1].SetActive(false);
+            StopCoroutine(Scoring(2));
+            gunBought = false;
+        }
+
+        if(value == 3 && springBought == true){
+            hiredOn[2].SetActive(true);
+            hiredOff[2].SetActive(false);
+            StopCoroutine(Scoring(3));
+            springBought = false;
+        } 
+    }
     IEnumerator Scoring(int value)
     {
         if(value == 1){
@@ -154,29 +172,44 @@ public class Hiring : MonoBehaviour
         }
     }
 
-    public void Unhire(int value, bool pressed)
-    {
-        if(value == 1 && pressed == true){
-            hired[0].SetActive(false);
-            priceText[0].text = "Hire again$" + price[0].ToString();
+    void LoadKeys(){
+        bugBought = PlayerPrefs.GetInt("BugBought") == 1;
+        gunBought = PlayerPrefs.GetInt("GunBought") == 1;
+        springBought = PlayerPrefs.GetInt("SpringBought") == 1;
+
+        if(PlayerPrefs.HasKey("BugBought"))
+        {
+            bugBought = PlayerPrefs.GetInt("BugBought") == 1;
         }
-        else if(pressed == false){
-            HiringShop(1);
+        else{
+            PlayerPrefs.SetInt("BugBought", 1);
+            PlayerPrefs.SetInt("BugBought", bugBought ? 1 : 0);
         }
-        if(value == 2 && pressed == true){
-            hired[1].SetActive(false);
-            priceText[1].text = "Hire again$" + price[1].ToString();
+
+        if(PlayerPrefs.HasKey("GunBought"))
+        {
+            gunBought = PlayerPrefs.GetInt("GunBought") == 1;
         }
-        else if(pressed == false){
-            HiringShop(2);
+        else{
+            PlayerPrefs.SetInt("GunBought", 1);
+            PlayerPrefs.SetInt("GunBought", gunBought ? 1 : 0);
         }
-        if(value == 3 && pressed == true){
-            hired[2].SetActive(false);
-            priceText[2].text = "Hire again$" + price[2].ToString();
+
+        if(PlayerPrefs.HasKey("SpringBought"))
+        {
+            springBought = PlayerPrefs.GetInt("SpringBought") == 1;
         }
-        else if(pressed == false){
-            HiringShop(3);
+        else{
+            PlayerPrefs.SetInt("SpringBought", 1);
+            PlayerPrefs.SetInt("SpringBought", springBought ? 1 : 0);
         }
-       
+        if(PlayerPrefs.HasKey("SelectedHired"))
+        {
+            selectedObject = PlayerPrefs.GetInt("SelectedHired");
+            for (int i = 0; i < activeItem.Length; i++){
+                activeItem[i] = anim[selectedObject];
+                }
+            
+        }
     }
 }

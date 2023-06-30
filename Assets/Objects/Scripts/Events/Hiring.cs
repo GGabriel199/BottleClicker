@@ -18,6 +18,7 @@ public class Hiring : MonoBehaviour
     [SerializeField] public GameObject ar;
     [SerializeField] public GameObject[] hiredOn;
     [SerializeField] public GameObject[] hiredOff;
+    public Image[] items;
     [SerializeField] public int[] price;
     private int selectedObject;
     [SerializeField] public TextMeshProUGUI[] priceText;
@@ -37,6 +38,7 @@ public class Hiring : MonoBehaviour
             GameManaging.o2 -= price[0];
             bugBought = true;
             selectedObject = 1;
+            items[0].color = new Color (255, 255, 255);
             PlayerPrefs.SetInt("BugBought", selectedObject);
             ar = animList[selectedObject];
             hiredOn[0].SetActive(false);
@@ -49,6 +51,7 @@ public class Hiring : MonoBehaviour
             gunBought = true;
             selectedObject = 2;
             PlayerPrefs.SetInt("GunBought", selectedObject);
+            items[1].color = new Color (255, 255, 255);
             ar = animList[selectedObject];
             Unhire(1);
             Unhire(3);
@@ -59,6 +62,7 @@ public class Hiring : MonoBehaviour
             GameManaging.o2 -= price[2];
             springBought = true;
             PlayerPrefs.SetInt("SpringBought", selectedObject);
+            items[2].color = new Color (255, 255, 255);
             ar = animList[selectedObject];
             selectedObject = 3;
             Unhire(1);
@@ -72,6 +76,7 @@ public class Hiring : MonoBehaviour
         if(bugBought != true)
         {
             priceText[0].text = "Buy$" + price[0].ToString();
+            items[0].color = new Color (0, 0, 0);
             hiredOn[0].SetActive(true);
             hiredOff[0].SetActive(false);
         }
@@ -86,6 +91,7 @@ public class Hiring : MonoBehaviour
         if(gunBought != true)
         {
             priceText[1].text = "Buy$" + price[1].ToString();
+            items[1].color = new Color (0, 0, 0);
             hiredOn[1].SetActive(true);
             hiredOff[1].SetActive(false);
         }
@@ -100,6 +106,7 @@ public class Hiring : MonoBehaviour
         if(springBought != true)
         {
             priceText[2].text = "Buy$" + price[2].ToString();
+            items[2].color = new Color (0, 0, 0);
             hiredOn[2].SetActive(true);
             hiredOff[2].SetActive(false);
         }
@@ -117,6 +124,7 @@ public class Hiring : MonoBehaviour
         if(value == 1 && bugBought == true){
             hiredOn[0].SetActive(true);
             hiredOff[0].SetActive(false);
+            items[0].color = new Color (0, 0, 0);
             StopCoroutine(Scoring(1));
             bugBought = false;
         }
@@ -124,6 +132,7 @@ public class Hiring : MonoBehaviour
         if(value == 2 && gunBought == true){
             hiredOn[1].SetActive(true);
             hiredOff[1].SetActive(false);
+            items[1].color = new Color (0, 0, 0);
             StopCoroutine(Scoring(2));
             gunBought = false;
         }
@@ -131,6 +140,7 @@ public class Hiring : MonoBehaviour
         if(value == 3 && springBought == true){
             hiredOn[2].SetActive(true);
             hiredOff[2].SetActive(false);
+            items[2].color = new Color (0, 0, 0);
             StopCoroutine(Scoring(3));
             springBought = false;
         } 

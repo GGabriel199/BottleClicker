@@ -22,6 +22,10 @@ public class PlayerLevel : MonoBehaviour
     private bool newHired;
     public Button multiplierButton;
 
+    public Image[] hiringImg;
+    public Image[] skinImg;
+    public Image[] backGrdImg;
+
     private void Start()
     {
         FindObjectOfType<SoundManager>().Play("Main Theme");
@@ -73,30 +77,38 @@ public class PlayerLevel : MonoBehaviour
             hiringButton[0].interactable = true;
             skinsBtn[0].interactable = true;
             backGroundBtn[0].interactable = true;
+            hiringImg[0].color = new Color (255, 255, 255);
+            skinImg[0].color = new Color (255, 255, 255);
+            backGrdImg[0].color = new Color (255, 255, 255);
         }
         if(level > 2){
             newSkins = true;
             newBackgrd = false;
             newHired = false;
             skinsBtn[1].interactable = true;
+            skinImg[1].color = new Color (255, 255, 255);
         }
         if(level > 3){
             newSkins = false;
             newHired = true;
             newBackgrd = true;
+            hiringImg[1].color = new Color (255, 255, 255);
             hiringButton[1].interactable = true;
             backGroundBtn[1].interactable = true;
+            backGrdImg[1].color = new Color (255, 255, 255);
         }
         if(level > 4){
             newSkins = true;
             newBackgrd = false;
             newHired = false;
             skinsBtn[2].interactable = true;
+            skinImg[2].color = new Color (255, 255, 255);
         }
         if(level > 5){
             newSkins = false;
             newBackgrd = false;
             newHired = true;
+            hiringImg[2].color = new Color (255, 255, 255);
             hiringButton[2].interactable = true;
         }
         if(level > 6){
@@ -105,11 +117,14 @@ public class PlayerLevel : MonoBehaviour
             newBackgrd = true;
             skinsBtn[3].interactable = true;
             backGroundBtn[2].interactable = true;
+            skinImg[3].color = new Color (255, 255, 255);
+            backGrdImg[3].color = new Color (255, 255, 255);
         }
         if(level > 7){
             newHired = true;
             newBackgrd = false;
             newSkins = false;
+            hiringImg[3].color = new Color (255, 255, 255);
             hiringButton[3].interactable = true;
         }
         if(level > 8){
@@ -122,6 +137,7 @@ public class PlayerLevel : MonoBehaviour
             newBackgrd = false;
             newHired = false;
             skinsBtn[4].interactable = true;
+            skinImg[4].color = new Color (255, 255, 255);
         }
     }
 }

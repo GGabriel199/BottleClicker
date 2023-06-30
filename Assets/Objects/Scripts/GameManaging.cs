@@ -12,8 +12,7 @@ public class GameManaging : MonoBehaviour
     //Skin properties
     public static GameObject sr;
     private int selectedSprite;
-    public GameObject[] selectedPrefab;
-    
+    public GameObject[] selectedPrefab;  
 
     void Start()
     {
@@ -31,6 +30,7 @@ public class GameManaging : MonoBehaviour
             sr.SetActive(true);
         }
     }
+
     void Update(){
         if(Input.GetKeyDown(KeyCode.R)){
             PlayerPrefs.DeleteAll();

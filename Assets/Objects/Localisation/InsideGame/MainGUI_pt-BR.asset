@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: MainGUI_pt-BR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pt-BR
+  m_SharedData: {fileID: 11400000, guid: 177ce8a1347d0f24c9ee361f8de67b86, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 8213203463196114948
+  m_TableData:
+  - m_Id: 276988534784
+    m_Localized: 'Cliques: '
+    m_Metadata:
+      m_Items:
+      - rid: 8213203463196114948
+  - m_Id: 421935292416
+    m_Localized: "Valor m\xE1ximo: "
+    m_Metadata:
+      m_Items:
+      - rid: 8213203463196114948
+  - m_Id: 451836485632
+    m_Localized: "N\xEDvel: "
+    m_Metadata:
+      m_Items:
+      - rid: 8213203463196114948
+  - m_Id: 477434322944
+    m_Localized: LOJA
+    m_Metadata:
+      m_Items:
+      - rid: 8213203463196114948
+  - m_Id: 506962223104
+    m_Localized: "Cen\xE1rio"
+    m_Metadata:
+      m_Items:
+      - rid: 8213203463196114948
+  references:
+    version: 2
+    RefIds:
+    - rid: 8213203463196114948
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00a0cd7d4000000000a04d3d6200000000a08d336900000000a04d296f00000000a04d0976000000

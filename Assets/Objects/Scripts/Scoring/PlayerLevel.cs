@@ -118,7 +118,7 @@ public class PlayerLevel : MonoBehaviour
             skinsBtn[3].interactable = true;
             backGroundBtn[2].interactable = true;
             skinImg[3].color = new Color (255, 255, 255);
-            backGrdImg[3].color = new Color (255, 255, 255);
+            backGrdImg[2].color = new Color (255, 255, 255);
         }
         if(level > 7){
             newHired = true;
@@ -138,6 +138,9 @@ public class PlayerLevel : MonoBehaviour
             newHired = false;
             skinsBtn[4].interactable = true;
             skinImg[4].color = new Color (255, 255, 255);
+        }
+        if(level > 10){
+            newSkins = false;
         }
     }
 }

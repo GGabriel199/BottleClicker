@@ -13,11 +13,13 @@ public class MusicOnOff : MonoBehaviour
         {
             musicOn.SetActive(true);
             musicOff.SetActive(false);
+            FindObjectOfType<SoundManager>().Play("Main Theme");
         }
         else
         {
             musicOn.SetActive(false);
             musicOff.SetActive(true);
+            FindObjectOfType<SoundManager>().StopPlaying("Main Theme");
         }
         if (PlayerPrefs.HasKey("MusicOff"))
         {

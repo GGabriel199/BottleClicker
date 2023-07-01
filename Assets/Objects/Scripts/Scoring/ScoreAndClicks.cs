@@ -10,6 +10,7 @@ public class ScoreAndClicks : MonoBehaviour
     public int[] cost;
     private int pressed = 1;
     public Button button;
+    public int timesClicked;
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI clicksText;
     public TextMeshProUGUI clicksTextShop;
@@ -27,8 +28,6 @@ public class ScoreAndClicks : MonoBehaviour
             selectedSprite = PlayerPrefs.GetInt("SelectedSprite");
             anim = GetComponent<Animator>();
         }
-        
-        
         FindObjectOfType<Particles>().SoundAndEffects();
     }
 
@@ -38,12 +37,14 @@ public class ScoreAndClicks : MonoBehaviour
         clicksTextShop.text = "$" + GameManaging.o2;
         maxValueTxt.text = "Max Value: " + maxValue.ToString();
         Cost();
+        cost[3] = maxValue/2;
     }
 
     private void LoadData(){
         GameManaging.multiplier = PlayerPrefs.GetInt("prefMoney", 1);
         GameManaging.o2 = PlayerPrefs.GetInt("o2", 0);
         maxValue = PlayerPrefs.GetInt("maxValue", 10);
+        timesClicked = PlayerPrefs.GetInt("TimesClickedMultiplier", 0);
         cost[0] = PlayerPrefs.GetInt("costSoda", 50);
         cost[1] = PlayerPrefs.GetInt("costWine", 150);
         cost[2] = PlayerPrefs.GetInt("costChoppMachine", 1200);
@@ -62,6 +63,7 @@ public class ScoreAndClicks : MonoBehaviour
             maxValue += maxValue * 1/5;
             FindObjectOfType<PlayerLevel>().LevelUp();
             PlayerPrefs.SetInt("maxValue", maxValue);
+            timesClicked = 0;
         }
     }
 
@@ -110,10 +112,11 @@ public class ScoreAndClicks : MonoBehaviour
             GameManaging.multiplier = GameManaging.multiplier *2;
             GameManaging.o2 -= cost[3];
             FindObjectOfType<SoundManager>().Play("MultiplierClick");
-            PlayerPrefs.SetInt("costMultiplier", GameManaging.o2);
+            PlayerPrefs.SetInt("costMultiplier", cost[3]);
             PlayerPrefs.SetInt("o2", GameManaging.o2);
             PlayerPrefs.SetInt("prefMoney", GameManaging.multiplier);
-            button.interactable = false;
+            timesClicked = 1;
+            PlayerPrefs.SetInt("TimesClickedMultiplier", timesClicked);
         }
     }
 
@@ -122,5 +125,11 @@ public class ScoreAndClicks : MonoBehaviour
         costText[1].text = "$" + cost[1];
         costText[2].text = "$" + cost[2];
         costText[3].text = "$" + cost[3];
+        if(timesClicked == 1){
+            button.interactable = false;
+        }
+        else if(timesClicked == 0){
+            button.interactable = true;
+        }
     }
 }

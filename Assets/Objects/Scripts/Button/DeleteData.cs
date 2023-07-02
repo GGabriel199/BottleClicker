@@ -14,6 +14,16 @@ public class DeleteData : MonoBehaviour
         PlayerPrefs.DeleteKey("costMultiplier");
         PlayerPrefs.DeleteKey("PlayerLevel");
         PlayerPrefs.DeleteKey("maxValue");
+        PlayerPrefs.DeleteKey("BugBought");
+        PlayerPrefs.DeleteKey("GunBought");
+        PlayerPrefs.DeleteKey("SpringBought");
+        PlayerPrefs.DeleteKey("muted");
+        PlayerPrefs.DeleteKey("LocationX");
+        PlayerPrefs.DeleteKey("LocationY");
+        PlayerPrefs.DeleteKey("MusicOff");
+        PlayerPrefs.DeleteKey("NextSong");
+        PlayerPrefs.DeleteKey("TimesClickedMultiplier");
+        
         SceneManager.LoadScene(0);
     }
 }

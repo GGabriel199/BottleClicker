@@ -39,29 +39,28 @@ public class Hiring : MonoBehaviour
             bugBought = true;
             selectedObject = 1;
             items[0].color = new Color (255, 255, 255);
-            PlayerPrefs.SetInt("BugBought", selectedObject);
             ar = animList[selectedObject];
             hiredOn[0].SetActive(false);
             hiredOff[0].SetActive(true);
             Unhire(2);
             Unhire(3);
+            PlayerPrefs.SetInt("BugBought", selectedObject);
         }
         if(value == 2 && GameManaging.o2 >= price[1] && gunBought == false){
             GameManaging.o2 -= price[1];
             gunBought = true;
             selectedObject = 2;
-            PlayerPrefs.SetInt("GunBought", selectedObject);
             items[1].color = new Color (255, 255, 255);
             ar = animList[selectedObject];
             Unhire(1);
             Unhire(3);
             hiredOn[1].SetActive(false);
             hiredOff[1].SetActive(true);
+            PlayerPrefs.SetInt("GunBought", selectedObject);
         }
         if(value == 3 && GameManaging.o2 >= price[2] && springBought == false){
             GameManaging.o2 -= price[2];
             springBought = true;
-            PlayerPrefs.SetInt("SpringBought", selectedObject);
             items[2].color = new Color (255, 255, 255);
             ar = animList[selectedObject];
             selectedObject = 3;
@@ -69,6 +68,7 @@ public class Hiring : MonoBehaviour
             Unhire(2);
             hiredOn[2].SetActive(false);
             hiredOff[2].SetActive(true);
+            PlayerPrefs.SetInt("SpringBought", selectedObject);
         }
     }
 
@@ -189,8 +189,6 @@ public class Hiring : MonoBehaviour
         if(PlayerPrefs.HasKey("BugBought"))
         {
             bugBought = PlayerPrefs.GetInt("BugBought") == 1;
-            PlayerPrefs.SetInt("BugBought", selectedObject);
-            ar = animList[selectedObject];
         }
         else{
             PlayerPrefs.SetInt("BugBought", 1);
@@ -200,8 +198,6 @@ public class Hiring : MonoBehaviour
         if(PlayerPrefs.HasKey("GunBought"))
         {
             gunBought = PlayerPrefs.GetInt("GunBought") == 1;
-            PlayerPrefs.SetInt("GunBought", selectedObject);
-            ar = animList[selectedObject];
         }
         else{
             PlayerPrefs.SetInt("GunBought", 1);
@@ -211,12 +207,11 @@ public class Hiring : MonoBehaviour
         if(PlayerPrefs.HasKey("SpringBought"))
         {
             springBought = PlayerPrefs.GetInt("SpringBought") == 1;
-            PlayerPrefs.SetInt("SpringBought", selectedObject);
-            ar = animList[selectedObject];
         }
         else{
             PlayerPrefs.SetInt("SpringBought", 1);
             PlayerPrefs.SetInt("SpringBought", springBought ? 1 : 0);
-        }       
+        }    
+        ar = animList[selectedObject];   
     }
 }

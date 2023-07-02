@@ -20,15 +20,14 @@ public class PlayerLevel : MonoBehaviour
     private bool newSkins;
     private bool newBackgrd;
     private bool newHired;
+    private int randomNumber;
     public Button multiplierButton;
-
     public Image[] hiringImg;
     public Image[] skinImg;
     public Image[] backGrdImg;
 
     private void Start()
-    {
-        FindObjectOfType<SoundManager>().Play("Main Theme");
+    { 
         level = PlayerPrefs.GetInt("PlayerLevel", 1);
     }
 
@@ -53,6 +52,7 @@ public class PlayerLevel : MonoBehaviour
         }
         GameManaging.multiplier = 1;
         GameManaging.o2 = 0;
+        PlayerPrefs.SetInt("prefMoney", GameManaging.multiplier);
         FindObjectOfType<SoundManager>().Play("LevelUp");
         FindObjectOfType<Particles>().SoundAndEffects();
         level++;

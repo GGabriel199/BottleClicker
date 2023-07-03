@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using UnityEngine.Localization;
+using TMPro; 
 
 public class ScoreAndClicks : MonoBehaviour
 {
@@ -34,11 +33,20 @@ public class ScoreAndClicks : MonoBehaviour
 
     private void Update()
     {
-        clicksText.text = "Clicks: " + GameManaging.o2;
-        clicksTextShop.text = "$" + GameManaging.o2;
-        maxValueTxt.text = "Max value: " + maxValue.ToString();
+        FormatNumber();
+        clicksTextShop.text = GameManaging.o2.ToString();
+        maxValueTxt.text = "Max value: " + maxValue/1000 + "k".ToString();
         Cost();
         cost[3] = maxValue/2;
+    }
+
+    private void FormatNumber(){
+        if(GameManaging.o2 >= 101){
+            clicksText.text = "Clicks: " + GameManaging.o2/1000 + "k".ToString();
+        }
+        else{
+            clicksText.text = "Clicks: " + GameManaging.o2.ToString();
+        }
     }
 
     private void LoadData(){

@@ -8,17 +8,18 @@ public class MusicOnOff : MonoBehaviour
     [SerializeField] public GameObject musicOn;
     [SerializeField] public GameObject musicOff;
     private bool muted = false;
-    public Button button;
+    public Button[] button;
     private int randomNumber;
     void Start(){
-        randomNumber = Random.Range(1,3);
+        randomNumber = Random.Range(1,4);
         muted = PlayerPrefs.GetInt("MusicOff") == 1;
         if (muted == false)
         {
             musicOn.SetActive(true);
             musicOff.SetActive(false);
             Music();
-            button.interactable = true;
+            button[0].interactable = true;
+            button[1].interactable = true;
         }
         else
         {
@@ -26,7 +27,9 @@ public class MusicOnOff : MonoBehaviour
             musicOff.SetActive(true);
             FindObjectOfType<SoundManager>().StopPlaying("Main Theme");
             FindObjectOfType<SoundManager>().StopPlaying("Main Theme 2");
-            button.interactable = false;
+            FindObjectOfType<SoundManager>().StopPlaying("Main Theme 3");
+            button[0].interactable = false;
+            button[1].interactable = false;
         }
         if (PlayerPrefs.HasKey("MusicOff"))
         {
@@ -46,13 +49,15 @@ public class MusicOnOff : MonoBehaviour
         {
             musicOn.SetActive(true);
             musicOff.SetActive(false);
-            button.interactable = true;
+            button[0].interactable = true;
+            button[1].interactable = true;
         }
         else
         {
             musicOn.SetActive(false);
             musicOff.SetActive(true);
-            button.interactable = false;
+            button[0].interactable = false;
+            button[1].interactable = false;
         }
     }
 
@@ -63,6 +68,9 @@ public class MusicOnOff : MonoBehaviour
         else if(randomNumber == 2){
             FindObjectOfType<SoundManager>().Play("Main Theme 2");
         }
+        else if(randomNumber == 3){
+            FindObjectOfType<SoundManager>().Play("Main Theme 3");
+        }
     }
     public void OnButtonPress()
     {
@@ -71,6 +79,7 @@ public class MusicOnOff : MonoBehaviour
             muted = true;
             FindObjectOfType<SoundManager>().StopPlaying("Main Theme");
             FindObjectOfType<SoundManager>().StopPlaying("Main Theme 2");
+            FindObjectOfType<SoundManager>().StopPlaying("Main Theme 3");
         }
         else
         {

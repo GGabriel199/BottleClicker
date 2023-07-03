@@ -18,7 +18,7 @@ public class GameManaging : MonoBehaviour
     {
         //Background
         float px = PlayerPrefs.GetFloat("LocationX");
-        float py = PlayerPrefs.GetFloat("LocationY");
+        float py = PlayerPrefs.GetFloat("LocationY", 50);
         
         startPosition.transform.position = new Vector3(px,py, -10);
         /*--------------------------x-------------------------------*/

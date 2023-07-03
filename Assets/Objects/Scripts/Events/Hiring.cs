@@ -127,6 +127,7 @@ public class Hiring : MonoBehaviour
             items[0].color = new Color (0, 0, 0);
             StopCoroutine(Scoring(1));
             bugBought = false;
+            PlayerPrefs.SetInt("BugBought", 0);
         }
 
         if(value == 2 && gunBought == true){
@@ -135,6 +136,7 @@ public class Hiring : MonoBehaviour
             items[1].color = new Color (0, 0, 0);
             StopCoroutine(Scoring(2));
             gunBought = false;
+            PlayerPrefs.SetInt("GunBought", 0);
         }
 
         if(value == 3 && springBought == true){
@@ -143,6 +145,7 @@ public class Hiring : MonoBehaviour
             items[2].color = new Color (0, 0, 0);
             StopCoroutine(Scoring(3));
             springBought = false;
+            PlayerPrefs.SetInt("SpringBought", 0);
         } 
     }
     IEnumerator Scoring(int value)
@@ -189,29 +192,28 @@ public class Hiring : MonoBehaviour
         if(PlayerPrefs.HasKey("BugBought"))
         {
             bugBought = PlayerPrefs.GetInt("BugBought") == 1;
+            ar = animList[selectedObject];
         }
         else{
-            PlayerPrefs.SetInt("BugBought", 1);
             PlayerPrefs.SetInt("BugBought", bugBought ? 1 : 0);
         }
 
         if(PlayerPrefs.HasKey("GunBought"))
         {
             gunBought = PlayerPrefs.GetInt("GunBought") == 1;
+            ar = animList[selectedObject];
         }
         else{
-            PlayerPrefs.SetInt("GunBought", 1);
             PlayerPrefs.SetInt("GunBought", gunBought ? 1 : 0);
         }
 
         if(PlayerPrefs.HasKey("SpringBought"))
         {
             springBought = PlayerPrefs.GetInt("SpringBought") == 1;
+            ar = animList[selectedObject];
         }
         else{
-            PlayerPrefs.SetInt("SpringBought", 1);
             PlayerPrefs.SetInt("SpringBought", springBought ? 1 : 0);
-        }    
-        ar = animList[selectedObject];   
+        }       
     }
 }

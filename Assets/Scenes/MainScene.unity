@@ -7333,15 +7333,20 @@ MonoBehaviour:
   - 10
   - 15
   - 6
-  animList:
-  - {fileID: 86405559}
-  - {fileID: 1808718554}
-  - {fileID: 1539383785}
   anim:
   - {fileID: 86405563}
   - {fileID: 1808718556}
   - {fileID: 1539383787}
-  ar: {fileID: 0}
+  price: 0f000000f4010000f8240100
+  ar:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  selectedObject: 000000000000000000000000
+  animList:
+  - {fileID: 86405559}
+  - {fileID: 1808718554}
+  - {fileID: 1539383785}
   hiredOn:
   - {fileID: 1337243866}
   - {fileID: 317258293}
@@ -7354,7 +7359,6 @@ MonoBehaviour:
   - {fileID: 401741236}
   - {fileID: 448967726}
   - {fileID: 914847585}
-  price: 0f000000f4010000f8240100
   priceText:
   - {fileID: 542113023}
   - {fileID: 96821549}

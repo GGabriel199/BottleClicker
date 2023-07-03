@@ -28,7 +28,7 @@ public class PlayerLevel : MonoBehaviour
 
     private void Start()
     { 
-        level = PlayerPrefs.GetInt("PlayerLevel", 1);
+        level = PlayerPrefs.GetInt("PlayerLevel", 10);
     }
 
     private void Update()

@@ -34,14 +34,14 @@ public class ScoreAndClicks : MonoBehaviour
     private void Update()
     {
         FormatNumber();
-        clicksTextShop.text = GameManaging.o2.ToString();
+        clicksTextShop.text = "$" + GameManaging.o2.ToString();
         maxValueTxt.text = "Max value: " + maxValue/1000 + "k".ToString();
         Cost();
         cost[3] = maxValue/2;
     }
 
     private void FormatNumber(){
-        if(GameManaging.o2 >= 101){
+        if(GameManaging.o2 >= 1001){
             clicksText.text = "Clicks: " + GameManaging.o2/1000 + "k".ToString();
         }
         else{
@@ -51,7 +51,7 @@ public class ScoreAndClicks : MonoBehaviour
 
     private void LoadData(){
         GameManaging.multiplier = PlayerPrefs.GetInt("prefMoney", 1);
-        GameManaging.o2 = PlayerPrefs.GetInt("o2", 0);
+        GameManaging.o2 = PlayerPrefs.GetInt("o2", 10000);
         maxValue = PlayerPrefs.GetInt("maxValue", 1000000);
         timesClicked = PlayerPrefs.GetInt("TimesClickedMultiplier", 0);
         cost[0] = PlayerPrefs.GetInt("costSoda", 50);

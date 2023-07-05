@@ -59,7 +59,7 @@ public class Hiring : MonoBehaviour
             GameManaging.o2 -= price[2];
             springBought = true;
             items[2].color = new Color (255, 255, 255);
-            ar[3] = animList[selectedObject[2]];
+            ar[2] = animList[selectedObject[2]];
             selectedObject[2] = 1;
             hiredOn[2].SetActive(false);
             hiredOff[2].SetActive(true);

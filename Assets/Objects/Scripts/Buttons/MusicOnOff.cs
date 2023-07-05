@@ -8,8 +8,12 @@ public class MusicOnOff : MonoBehaviour
     [SerializeField] public GameObject musicOn;
     [SerializeField] public GameObject musicOff;
     private bool muted = false;
+    public AudioSource track1;
+    public AudioSource track2;
+    public AudioSource track3;
     public Button[] button;
-    private int randomNumber;
+    [SerializeField] public static int randomNumber;
+    private int trackHistory;
     void Start(){
         randomNumber = Random.Range(1,4);
         muted = PlayerPrefs.GetInt("MusicOff") == 1;
@@ -25,9 +29,9 @@ public class MusicOnOff : MonoBehaviour
         {
             musicOn.SetActive(false);
             musicOff.SetActive(true);
-            FindObjectOfType<SoundManager>().StopPlaying("Main Theme");
-            FindObjectOfType<SoundManager>().StopPlaying("Main Theme 2");
-            FindObjectOfType<SoundManager>().StopPlaying("Main Theme 3");
+            track1.Stop();
+            track2.Stop();
+            track3.Stop();
             button[0].interactable = false;
             button[1].interactable = false;
         }
@@ -61,15 +65,50 @@ public class MusicOnOff : MonoBehaviour
         }
     }
 
+    private void NextTrack(){
+        if(track1.isPlaying == false && track2.isPlaying == false && track3.isPlaying == false){
+            randomNumber = Random.Range(1,4);
+
+            if(randomNumber == 1 && trackHistory != 1){
+                track2.Stop();
+                track3.Stop();
+                track1.Play();
+                trackHistory = 1;
+            }
+            else if(randomNumber == 2 && trackHistory != 2){
+                track1.Stop();
+                track3.Stop();
+                track2.Play();
+                trackHistory = 2;
+            }
+            else if(randomNumber == 3 && trackHistory != 3){
+                track2.Stop();
+                track1.Stop();
+                track3.Play();
+                trackHistory = 3;
+            }
+        }
+    }
+
+
     private void Music(){
         if(randomNumber == 1){
-            FindObjectOfType<SoundManager>().Play("Main Theme");
+            track1.Play();
+            track2.Stop();
+            track3.Stop();
+            trackHistory = 1;
         }
         else if(randomNumber == 2){
-            FindObjectOfType<SoundManager>().Play("Main Theme 2");
+            track2.Play();
+            track1.Stop();
+            track3.Stop();
+            trackHistory = 2;
         }
         else if(randomNumber == 3){
-            FindObjectOfType<SoundManager>().Play("Main Theme 3");
+            track3.Play();
+            track1.Stop();
+            track2.Stop();
+            trackHistory = 3;
         }
     }
     public void OnButtonPress()
@@ -77,9 +116,9 @@ public class MusicOnOff : MonoBehaviour
         if (muted == false)
         {
             muted = true;
-            FindObjectOfType<SoundManager>().StopPlaying("Main Theme");
-            FindObjectOfType<SoundManager>().StopPlaying("Main Theme 2");
-            FindObjectOfType<SoundManager>().StopPlaying("Main Theme 3");
+            track1.Stop();
+            track2.Stop();
+            track3.Stop();
         }
         else
         {

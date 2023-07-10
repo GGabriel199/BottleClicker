@@ -8,12 +8,13 @@ public class MusicOnOff : MonoBehaviour
     [SerializeField] public GameObject musicOn;
     [SerializeField] public GameObject musicOff;
     private bool muted = false;
-    public AudioSource track1;
-    public AudioSource track2;
-    public AudioSource track3;
+    [SerializeField] public AudioSource track1;
+    [SerializeField] public AudioSource track2;
+    [SerializeField] public AudioSource track3;
     public Button[] button;
     [SerializeField] public static int randomNumber;
     private int trackHistory;
+
     void Start(){
         randomNumber = Random.Range(1,4);
         muted = PlayerPrefs.GetInt("MusicOff") == 1;
@@ -21,7 +22,7 @@ public class MusicOnOff : MonoBehaviour
         {
             musicOn.SetActive(true);
             musicOff.SetActive(false);
-            Music();
+            NextTrack();
             button[0].interactable = true;
             button[1].interactable = true;
         }
@@ -47,6 +48,12 @@ public class MusicOnOff : MonoBehaviour
 
     }
 
+    void Update(){
+        if(muted == false){
+            NextTrack();
+        }
+    }
+
     private void UpdateButtonIcon()
     {
         if (muted == false)
@@ -68,22 +75,16 @@ public class MusicOnOff : MonoBehaviour
     private void NextTrack(){
         if(track1.isPlaying == false && track2.isPlaying == false && track3.isPlaying == false){
             randomNumber = Random.Range(1,4);
-
+            trackHistory = Random.Range(1,4);
             if(randomNumber == 1 && trackHistory != 1){
-                track2.Stop();
-                track3.Stop();
                 track1.Play();
                 trackHistory = 1;
             }
             else if(randomNumber == 2 && trackHistory != 2){
-                track1.Stop();
-                track3.Stop();
                 track2.Play();
                 trackHistory = 2;
             }
             else if(randomNumber == 3 && trackHistory != 3){
-                track2.Stop();
-                track1.Stop();
                 track3.Play();
                 trackHistory = 3;
             }
@@ -91,20 +92,21 @@ public class MusicOnOff : MonoBehaviour
     }
 
 
-    private void Music(){
-        if(randomNumber == 1){
+    public void Music(int value){
+        randomNumber = value;
+        if(value == 1 && trackHistory != 1){
             track1.Play();
             track2.Stop();
             track3.Stop();
             trackHistory = 1;
         }
-        else if(randomNumber == 2){
+        else if(value == 2 && trackHistory != 2){
             track2.Play();
             track1.Stop();
             track3.Stop();
             trackHistory = 2;
         }
-        else if(randomNumber == 3){
+        else if(value == 3 && trackHistory != 3){
             track3.Play();
             track1.Stop();
             track2.Stop();
@@ -123,7 +125,7 @@ public class MusicOnOff : MonoBehaviour
         else
         {
             muted = false;
-            Music();
+            NextTrack();
         }
         UpdateButtonIcon();
         Save();

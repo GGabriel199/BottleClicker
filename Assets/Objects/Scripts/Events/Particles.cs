@@ -5,18 +5,21 @@ public class Particles : MonoBehaviour
 {
     public GameObject[] particles;
 
-    public void SoundAndEffects(){
-        if(GameManaging.o2 >= 200000){
+    void Start(){
+        if(GameManaging.o2 >= 200000 && GameManaging.o2 <= 600000){
             particles[0].SetActive(true);
             FindObjectOfType<SoundManager>().Play("Bubbles");
         }
 
-        if(GameManaging.o2 >= 600000){
+        if(GameManaging.o2 >= 600000 && GameManaging.o2 <= 1100000){
             particles[1].SetActive(true);
-            particles[0].SetActive(false);
             
-            FindObjectOfType<SoundManager>().StopPlaying("Bubbles");
             FindObjectOfType<SoundManager>().Play("Rain");
+        }
+        if(GameManaging.o2 >= 1100000){
+            particles[2].SetActive(true);
+
+            FindObjectOfType<SoundManager>().Play("Flames");
         }
     }
 }

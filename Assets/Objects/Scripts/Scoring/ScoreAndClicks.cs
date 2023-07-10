@@ -28,7 +28,6 @@ public class ScoreAndClicks : MonoBehaviour
             selectedSprite = PlayerPrefs.GetInt("SelectedSprite");
             anim = GetComponent<Animator>();
         }
-        FindObjectOfType<Particles>().SoundAndEffects();
     }
 
     private void Update()

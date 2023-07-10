@@ -7,12 +7,12 @@ using TMPro;
 
 public class Hiring : MonoBehaviour
 {
-    [SerializeField] public float[] clickEvent;
     [SerializeField] public float[] startTime;
     private const float timerLimit = 0f;
     private bool bugBought;
     private bool gunBought;
     private bool springBought;
+    private bool bikerBought;
     
     [SerializeField] public Animator[] anim;
     [SerializeField] public int[] price;
@@ -65,12 +65,23 @@ public class Hiring : MonoBehaviour
             hiredOff[2].SetActive(true);
             PlayerPrefs.SetInt("SpringBought", selectedObject[2]);
         }
+        if(value == 4 && GameManaging.o2 >= price[3] && bikerBought == false){
+            GameManaging.o2 -= price[3];
+            bikerBought = true;
+            items[3].color = new Color (255, 255, 255);
+            ar[3] = animList[selectedObject[3]];
+            selectedObject[3] = 1;
+            hiredOn[3].SetActive(false);
+            hiredOff[3].SetActive(true);
+            PlayerPrefs.SetInt("BikerBought", selectedObject[3]);
+        }
     }
 
     void LoadKeys(){
         selectedObject[0] = PlayerPrefs.GetInt("BugBought");
         selectedObject[1] = PlayerPrefs.GetInt("GunBought");
         selectedObject[2] = PlayerPrefs.GetInt("SpringBought");
+        selectedObject[3] = PlayerPrefs.GetInt("BikerBought");
 
         if(selectedObject[0] == 1)
         {
@@ -88,7 +99,12 @@ public class Hiring : MonoBehaviour
         {
             ar[2] = animList[selectedObject[2]];
             springBought = true;
-        } 
+        }
+        if(selectedObject[3] == 1)
+        {
+            ar[3] = animList[selectedObject[3]];
+            bikerBought = true;
+        }
     }
 
     void Isbought(){
@@ -137,6 +153,21 @@ public class Hiring : MonoBehaviour
                 startTime[2] = 6f;
             }
         }
+        if(bikerBought != true)
+        {
+            priceText[3].text = "Buy$" + price[3].ToString();
+            items[3].color = new Color (0, 0, 0);
+            hiredOn[3].SetActive(true);
+            hiredOff[3].SetActive(false);
+        }
+        else
+        {
+            startTime[3] -= Time.deltaTime;
+            if(startTime[3]< timerLimit){
+                StartCoroutine(Scoring(4));
+                startTime[3] = 8f;
+            }
+        }
     }
     public void Unhire(int value)
     {
@@ -169,13 +200,22 @@ public class Hiring : MonoBehaviour
             selectedObject [2] = 0;
             PlayerPrefs.SetInt("SpringBought", selectedObject[2]);
         } 
+        if(value == 4 && bikerBought == true){
+            hiredOn[3].SetActive(true);
+            hiredOff[3].SetActive(false);
+            items[3].color = new Color (0, 0, 0);
+            StopCoroutine(Scoring(4));
+            springBought = false;
+            selectedObject [3] = 0;
+            PlayerPrefs.SetInt("BikerBought", selectedObject[3]);
+        } 
     }
     IEnumerator Scoring(int value)
     {
         if(value == 1){
             anim[0].Play("JumpAndClick");
 
-            yield return new WaitForSeconds(clickEvent[0]);
+            yield return new WaitForSeconds(0.8f);
             FindObjectOfType<ScoreAndClicks>().PlusClicks();
 
             yield break;
@@ -184,15 +224,15 @@ public class Hiring : MonoBehaviour
         if(value == 2){
             anim[1].Play("PistolWater");
 
-            yield return new WaitForSeconds(clickEvent[1]);
+            yield return new WaitForSeconds(0.4f);
             FindObjectOfType<ScoreAndClicks>().PlusClicks();
-            yield return new WaitForSeconds(clickEvent[1]);
+            yield return new WaitForSeconds(0.4f);
             FindObjectOfType<ScoreAndClicks>().PlusClicks();
-            yield return new WaitForSeconds(clickEvent[1]);
+            yield return new WaitForSeconds(0.4f);
             FindObjectOfType<ScoreAndClicks>().PlusClicks();
-            yield return new WaitForSeconds(clickEvent[1]);
+            yield return new WaitForSeconds(0.4f);
             FindObjectOfType<ScoreAndClicks>().PlusClicks();
-            yield return new WaitForSeconds(clickEvent[1]);
+            yield return new WaitForSeconds(0.4f);
             FindObjectOfType<ScoreAndClicks>().PlusClicks();
 
             yield break;
@@ -201,9 +241,22 @@ public class Hiring : MonoBehaviour
         if(value == 3){
             anim[2].Play("springjump");
 
-            yield return new WaitForSeconds(clickEvent[2]);
+            yield return new WaitForSeconds(1.1f);
             FindObjectOfType<ScoreAndClicks>().PlusClicks();
-            yield return new WaitForSeconds(clickEvent[2]);
+            yield return new WaitForSeconds(1.1f);
+            FindObjectOfType<ScoreAndClicks>().PlusClicks();
+
+            yield break;
+        }
+
+        if(value == 4){
+            anim[3].Play("jumpBiker");
+
+            yield return new WaitForSeconds(1.1f);
+            FindObjectOfType<ScoreAndClicks>().PlusClicks();
+            yield return new WaitForSeconds(1.8f);
+            FindObjectOfType<ScoreAndClicks>().PlusClicks();
+            yield return new WaitForSeconds(2.9f);
             FindObjectOfType<ScoreAndClicks>().PlusClicks();
 
             yield break;

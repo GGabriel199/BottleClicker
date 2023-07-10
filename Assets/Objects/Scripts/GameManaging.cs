@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManaging : MonoBehaviour
 {
-    //Background properties
+    //Cash properties
     public static int o2;
     public static int multiplier;
+    public static int goldenO2;
     public Transform startPosition;
-
+    public TextMeshProUGUI gbTxt;
     //Skin properties
     public static GameObject sr;
     private int selectedSprite;
@@ -16,6 +18,9 @@ public class GameManaging : MonoBehaviour
 
     void Start()
     {
+        goldenO2 = PlayerPrefs.GetInt("GoldenBottle");
+        gbTxt.text = "x" + goldenO2.ToString();
+
         //Background
         float px = PlayerPrefs.GetFloat("LocationX");
         float py = PlayerPrefs.GetFloat("LocationY", 50);

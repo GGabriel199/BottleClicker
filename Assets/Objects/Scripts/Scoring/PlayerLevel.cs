@@ -35,6 +35,15 @@ public class PlayerLevel : MonoBehaviour
     {
         txtLevel.text = "Level: " + level.ToString();
         CheckLevel();
+        if(level == 2){
+            GameManaging.goldenO2 += 1;
+        }
+        if(level == 5){
+            GameManaging.goldenO2 += 2;
+        }
+        if(level == 10){
+            GameManaging.goldenO2 += 6;
+        }
     }
 
     public void Buttons(){

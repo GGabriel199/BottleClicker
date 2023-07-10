@@ -66,6 +66,7 @@ public class ScoreAndClicks : MonoBehaviour
         anim.Play("Press");
         pressed = Random.Range(1,4);
         PlayerPrefs.SetInt("o2", GameManaging.o2);
+        PlayerPrefs.SetInt("GoldenBottle", GameManaging.goldenO2);
         if (GameManaging.o2 >= maxValue)
         {
             maxValue += maxValue * 1/5;
@@ -139,5 +140,11 @@ public class ScoreAndClicks : MonoBehaviour
         else{
             button.interactable = true;
         }
+    }
+
+    private void ParticlesOn(){
+        FindObjectOfType<Particles>().Bubbles();
+        FindObjectOfType<Particles>().Rain();
+        FindObjectOfType<Particles>().Flames();
     }
 }

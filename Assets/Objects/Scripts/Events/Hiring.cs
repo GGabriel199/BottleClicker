@@ -43,6 +43,7 @@ public class Hiring : MonoBehaviour
             ar[0] = animList[selectedObject[0]];
             hiredOn[0].SetActive(false);
             hiredOff[0].SetActive(true);
+            FindObjectOfType<SoundManager>().Play("Bug");
             PlayerPrefs.SetInt("BugBought", selectedObject[0]);
         }
         if(value == 2 && GameManaging.o2 >= price[1] && gunBought == false){
@@ -53,6 +54,7 @@ public class Hiring : MonoBehaviour
             ar[1] = animList[selectedObject[1]];
             hiredOn[1].SetActive(false);
             hiredOff[1].SetActive(true);
+            FindObjectOfType<SoundManager>().Play("Gun");
             PlayerPrefs.SetInt("GunBought", selectedObject[1]);
         }
         if(value == 3 && GameManaging.o2 >= price[2] && springBought == false){
@@ -63,6 +65,7 @@ public class Hiring : MonoBehaviour
             selectedObject[2] = 1;
             hiredOn[2].SetActive(false);
             hiredOff[2].SetActive(true);
+            FindObjectOfType<SoundManager>().Play("Spring");
             PlayerPrefs.SetInt("SpringBought", selectedObject[2]);
         }
         if(value == 4 && GameManaging.o2 >= price[3] && bikerBought == false){
@@ -73,6 +76,7 @@ public class Hiring : MonoBehaviour
             selectedObject[3] = 1;
             hiredOn[3].SetActive(false);
             hiredOff[3].SetActive(true);
+            FindObjectOfType<SoundManager>().Play("Bike");
             PlayerPrefs.SetInt("BikerBought", selectedObject[3]);
         }
     }

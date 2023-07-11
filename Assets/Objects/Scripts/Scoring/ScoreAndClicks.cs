@@ -67,6 +67,7 @@ public class ScoreAndClicks : MonoBehaviour
         pressed = Random.Range(1,4);
         PlayerPrefs.SetInt("o2", GameManaging.o2);
         PlayerPrefs.SetInt("GoldenBottle", GameManaging.goldenO2);
+        ParticlesOn();
         if (GameManaging.o2 >= maxValue)
         {
             maxValue += maxValue * 1/5;

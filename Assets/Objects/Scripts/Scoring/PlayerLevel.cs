@@ -63,6 +63,7 @@ public class PlayerLevel : MonoBehaviour
         GameManaging.o2 = 0;
         PlayerPrefs.SetInt("prefMoney", GameManaging.multiplier);
         FindObjectOfType<SoundManager>().Play("LevelUp");
+        FindObjectOfType<Particles>().StopParticles();
         level++;
         PlayerPrefs.SetInt("PlayerLevel", level);
         if(newSkins == true){

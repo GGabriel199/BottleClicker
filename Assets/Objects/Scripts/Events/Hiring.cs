@@ -183,6 +183,7 @@ public class Hiring : MonoBehaviour
             bugBought = false;
             selectedObject [0] = 0;
             PlayerPrefs.SetInt("BugBought", selectedObject[0]);
+            FindObjectOfType<SoundManager>().Play("Selected");
         }
 
         if(value == 2 && gunBought == true){
@@ -193,6 +194,7 @@ public class Hiring : MonoBehaviour
             gunBought = false;
             selectedObject [1] = 0;
             PlayerPrefs.SetInt("GunBought", selectedObject[1]);
+            FindObjectOfType<SoundManager>().Play("Selected");
         }
 
         if(value == 3 && springBought == true){
@@ -203,6 +205,7 @@ public class Hiring : MonoBehaviour
             springBought = false;
             selectedObject [2] = 0;
             PlayerPrefs.SetInt("SpringBought", selectedObject[2]);
+            FindObjectOfType<SoundManager>().Play("Selected");
         } 
         if(value == 4 && bikerBought == true){
             hiredOn[3].SetActive(true);
@@ -212,6 +215,7 @@ public class Hiring : MonoBehaviour
             springBought = false;
             selectedObject [3] = 0;
             PlayerPrefs.SetInt("BikerBought", selectedObject[3]);
+            FindObjectOfType<SoundManager>().Play("Selected");
         } 
     }
     IEnumerator Scoring(int value)

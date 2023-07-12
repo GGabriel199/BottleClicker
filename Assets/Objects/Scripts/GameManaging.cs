@@ -19,7 +19,7 @@ public class GameManaging : MonoBehaviour
     void Start()
     {
         goldenO2 = PlayerPrefs.GetInt("GoldenBottle");
-        gbTxt.text = "x" + goldenO2.ToString();
+        gbTxt.text = goldenO2.ToString();
 
         //Background
         float px = PlayerPrefs.GetFloat("LocationX");
@@ -33,6 +33,13 @@ public class GameManaging : MonoBehaviour
             sr = Instantiate(selectedPrefab[selectedSprite]) as GameObject;
             sr.transform.SetParent(transform);
             sr.SetActive(true);
+        }
+        else{
+            selectedSprite = 0;
+            sr = Instantiate(selectedPrefab[selectedSprite]) as GameObject;
+            sr.transform.SetParent(transform);
+            sr.SetActive(true);
+            PlayerPrefs.SetInt("SelectedSprite",selectedSprite);
         }
     }
 

@@ -28,7 +28,7 @@ public class PlayerLevel : MonoBehaviour
 
     private void Start()
     { 
-        level = PlayerPrefs.GetInt("PlayerLevel", 10);
+        level = PlayerPrefs.GetInt("PlayerLevel", 1);
     }
 
     private void Update()
@@ -150,6 +150,10 @@ public class PlayerLevel : MonoBehaviour
         }
         if(level > 10){
             newSkins = false;
+            newBackgrd = true;
+            newHired = false;
+            backGrdImg[3].color = new Color (255, 255, 255);
+            backGroundBtn[3].interactable = true;
         }
     }
 }

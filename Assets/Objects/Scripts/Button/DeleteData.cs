@@ -23,7 +23,8 @@ public class DeleteData : MonoBehaviour
         PlayerPrefs.DeleteKey("MusicOff");
         PlayerPrefs.DeleteKey("NextSong");
         PlayerPrefs.DeleteKey("TimesClickedMultiplier");
-        
+        PlayerPrefs.DeleteKey("BikerBought");
+        PlayerPrefs.DeleteKey("PanelClosed");
         SceneManager.LoadScene(0);
     }
 }

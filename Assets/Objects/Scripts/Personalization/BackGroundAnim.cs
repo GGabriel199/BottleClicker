@@ -48,4 +48,13 @@ public class BackGroundAnim : MonoBehaviour
         PlayerPrefs.SetFloat("LocationX", playerLocation.transform.position.x);
         PlayerPrefs.SetFloat("LocationY", playerLocation.transform.position.y);
     }
+
+    public void Cyber(){
+        FindObjectOfType<SoundManager>().Play("Click");
+        Vector3 locationCyb = new Vector3(locationX[4],locationY[4], locationZ);
+        playerLocation.transform.position = locationCyb;
+
+        PlayerPrefs.SetFloat("LocationX", playerLocation.transform.position.x);
+        PlayerPrefs.SetFloat("LocationY", playerLocation.transform.position.y);
+    }
 }

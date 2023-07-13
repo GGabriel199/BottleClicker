@@ -13,10 +13,11 @@ public class PlayerLevel : MonoBehaviour
     public TextMeshProUGUI txtLevel;
     public TextMeshProUGUI[] lockedTxt;
     public Animator popUp;
-    public Animator labelSkin;
-    public Animator labelBackground;
-    public Animator labelHired;
+    public GameObject labelSkin;
+    public GameObject labelBackground;
+    public GameObject labelHired;
     public GameObject[] label;
+    public TextMeshProUGUI gbTxt;
     private bool newSkins;
     private bool newBackgrd;
     private bool newHired;
@@ -34,16 +35,9 @@ public class PlayerLevel : MonoBehaviour
     private void Update()
     {
         txtLevel.text = "Level: " + level.ToString();
+        gbTxt.text = GameManaging.goldenO2.ToString();
         CheckLevel();
-        if(level == 2){
-            GameManaging.goldenO2 += 1;
-        }
-        if(level == 5){
-            GameManaging.goldenO2 += 2;
-        }
-        if(level == 10){
-            GameManaging.goldenO2 += 6;
-        }
+        AnimationLabel();
     }
 
     public void Buttons(){
@@ -61,28 +55,35 @@ public class PlayerLevel : MonoBehaviour
         }
         GameManaging.multiplier = 1;
         GameManaging.o2 = 0;
+        GameManaging.goldenO2 += 1;
         PlayerPrefs.SetInt("prefMoney", GameManaging.multiplier);
         FindObjectOfType<SoundManager>().Play("LevelUp");
         FindObjectOfType<Particles>().StopParticles();
         level++;
         PlayerPrefs.SetInt("PlayerLevel", level);
-        if(newSkins == true){
-            labelSkin.Play("New Skin");
+        if(newSkins != false){
+            labelSkin.SetActive(true);
         }
-        if(newBackgrd == true){
-            labelBackground.Play("New Background");
+        else{
+            labelSkin.SetActive(false);
         }
-        if(newHired == true){
-            labelHired.Play("LabelHired");
+        if(newBackgrd != false){
+            labelBackground.SetActive(true);
+        }
+        else{
+            labelBackground.SetActive(false);
+        }
+        if(newHired != false){
+            labelHired.SetActive(true);
+        }
+        else{
+            labelHired.SetActive(false);
         }
         
     }
 
-    public void CheckLevel(){
+    private void CheckLevel(){
         if(level > 1){
-            newSkins = true;
-            newHired = true;
-            newBackgrd = true;
             hiringButton[0].interactable = true;
             skinsBtn[0].interactable = true;
             backGroundBtn[0].interactable = true;
@@ -90,70 +91,97 @@ public class PlayerLevel : MonoBehaviour
             skinImg[0].color = new Color (255, 255, 255);
             backGrdImg[0].color = new Color (255, 255, 255);
         }
-        if(level > 2){
-            newSkins = true;
-            newBackgrd = false;
-            newHired = false;
-            skinsBtn[1].interactable = true;
-            skinImg[1].color = new Color (255, 255, 255);
-        }
         if(level > 3){
-            newSkins = false;
-            newHired = true;
-            newBackgrd = true;
             hiringImg[1].color = new Color (255, 255, 255);
             hiringButton[1].interactable = true;
             backGroundBtn[1].interactable = true;
             backGrdImg[1].color = new Color (255, 255, 255);
         }
         if(level > 4){
-            newSkins = true;
-            newBackgrd = false;
-            newHired = false;
+            skinsBtn[1].interactable = true;
+            skinImg[1].color = new Color (255, 255, 255);
+        }
+        if(level > 5){
+            hiringImg[2].color = new Color (255, 255, 255);
+            hiringButton[2].interactable = true;
             skinsBtn[2].interactable = true;
             skinImg[2].color = new Color (255, 255, 255);
         }
-        if(level > 5){
-            newSkins = false;
-            newBackgrd = false;
-            newHired = true;
-            hiringImg[2].color = new Color (255, 255, 255);
-            hiringButton[2].interactable = true;
-        }
         if(level > 6){
-            newSkins = true;
-            newHired = false;
-            newBackgrd = true;
             skinsBtn[3].interactable = true;
-            backGroundBtn[2].interactable = true;
             skinImg[3].color = new Color (255, 255, 255);
-            backGrdImg[2].color = new Color (255, 255, 255);
         }
         if(level > 7){
-            newHired = true;
-            newBackgrd = false;
-            newSkins = false;
             hiringImg[3].color = new Color (255, 255, 255);
             hiringButton[3].interactable = true;
-        }
-        if(level > 8){
-            newSkins = false;
-            newBackgrd = false;
-            newHired = false;
+            backGroundBtn[2].interactable = true;
+            backGrdImg[2].color = new Color (255, 255, 255);
         }
         if(level > 9){
-            newSkins = true;
-            newBackgrd = false;
-            newHired = false;
             skinsBtn[4].interactable = true;
             skinImg[4].color = new Color (255, 255, 255);
         }
         if(level > 10){
+            backGrdImg[3].color = new Color (255, 255, 255);
+            backGroundBtn[3].interactable = true;
+        }
+    }
+
+    private void AnimationLabel(){
+        if(level == 1){
+            newSkins = true;
+            newHired = true;
+            newBackgrd = true;
+        }
+        if(level == 2){
+            newSkins = false;
+            newBackgrd = false;
+            newHired = false;
+        }
+        if(level == 3){
+            newSkins = false;
+            newHired = true;
+            newBackgrd = true;
+        }
+        if(level == 4){
+            newSkins = true;
+            newBackgrd = false;
+            newHired = false;
+        }
+        if(level == 5){
+            newSkins = true;
+            newBackgrd = false;
+            newHired = true;
+        }
+        if(level == 6){
+            newSkins = true;
+            newHired = false;
+            newBackgrd = false;
+        }
+        if(level == 7){
+            newHired = true;
+            newBackgrd = true;
+            newSkins = false;
+        }
+        if(level == 8){
+            newSkins = false;
+            newBackgrd = false;
+            newHired = false;
+        }
+        if(level == 9){
+            newSkins = true;
+            newBackgrd = false;
+            newHired = false;
+        }
+        if(level == 10){
             newSkins = false;
             newBackgrd = true;
             newHired = false;
-            backGrdImg[3].color = new Color (255, 255, 255);
-            backGroundBtn[3].interactable = true;
+        }
+        if(level == 11){
+            newSkins = false;
+            newBackgrd = false;
+            newHired = false;
         }
     }
 }

@@ -27,7 +27,6 @@ public class NextSong : MonoBehaviour
         if(selectedMusic > 4){
             selectedMusic = 0;
         }
-        Debug.Log("Nº" + selectedMusic);
     }
     public void PreviousMusic(){
         selectedMusic = selectedMusic - 1;
@@ -49,6 +48,5 @@ public class NextSong : MonoBehaviour
         if(selectedMusic == 4){
             FindObjectOfType<MusicOnOff>().Music(5);
         }
-        Debug.Log("Nº" + selectedMusic);
     }
 }

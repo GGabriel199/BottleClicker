@@ -10,7 +10,6 @@ public class GameManaging : MonoBehaviour
     public static int multiplier;
     public static int goldenO2;
     public Transform startPosition;
-    public TextMeshProUGUI gbTxt;
     //Skin properties
     public static GameObject sr;
     private int selectedSprite;
@@ -19,7 +18,6 @@ public class GameManaging : MonoBehaviour
     void Start()
     {
         goldenO2 = PlayerPrefs.GetInt("GoldenBottle");
-        gbTxt.text = goldenO2.ToString();
 
         //Background
         float px = PlayerPrefs.GetFloat("LocationX");

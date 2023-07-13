@@ -6,14 +6,14 @@ public class SfxOnOff : MonoBehaviour
 {
     [SerializeField] public GameObject sfxOff;
     [SerializeField] public GameObject sfxOn;
-    private bool muted = false;
+    private float muted = 0;
 
     void Awake(){
-        muted = PlayerPrefs.GetInt("muted") == 1;
+        muted = PlayerPrefs.GetFloat("muted", 1);
     }
 
     void Start(){
-        if (muted == false)
+        if (muted == 0)
         {
             sfxOn.SetActive(true);
             sfxOff.SetActive(false);
@@ -29,16 +29,16 @@ public class SfxOnOff : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetInt("muted", 1);
+            PlayerPrefs.SetFloat("muted", 1);
             Save();
         }
 
-        AudioListener.pause = muted;
+        AudioListener.volume = muted;
     }
 
     private void UpdateButtonIcon()
     {
-        if (muted == false)
+        if (muted == 0)
         {
             sfxOn.SetActive(true);
             sfxOff.SetActive(false);
@@ -52,26 +52,26 @@ public class SfxOnOff : MonoBehaviour
 
     public void OnButtonPress()
     {
-        if (muted == false)
+        if (muted == 0)
         {
-            muted = true;
-            AudioListener.pause = true;
+            muted = 1;
+            AudioListener.volume = 1;
         }
         else
         {
-            muted = false;
-            AudioListener.pause = false;
+            muted = 0;
+            AudioListener.volume = 0;
         }
         UpdateButtonIcon();
         Save();
     }
     private void Load()
     {
-        muted = PlayerPrefs.GetInt("muted") == 1;
+        muted = PlayerPrefs.GetFloat("muted", 0);
     }
 
     private void Save()
     {
-        PlayerPrefs.SetInt("muted", muted ? 1 : 0);
+        PlayerPrefs.SetFloat("muted", muted);
     }
 }

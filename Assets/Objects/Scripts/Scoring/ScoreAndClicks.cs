@@ -51,7 +51,7 @@ public class ScoreAndClicks : MonoBehaviour
     private void LoadData(){
         GameManaging.multiplier = PlayerPrefs.GetInt("prefMoney", 1);
         GameManaging.o2 = PlayerPrefs.GetInt("o2", 0);
-        maxValue = PlayerPrefs.GetInt("maxValue", 10);
+        maxValue = PlayerPrefs.GetInt("maxValue", 1000000);
         timesClicked = PlayerPrefs.GetInt("TimesClickedMultiplier", 0);
         cost[0] = PlayerPrefs.GetInt("costSoda", 50);
         cost[1] = PlayerPrefs.GetInt("costWine", 150);
